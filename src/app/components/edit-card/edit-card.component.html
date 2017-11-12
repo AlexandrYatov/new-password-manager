@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<div class="row">
+  <h2 class="col s12 header">Edit card</h2>
+  <div class="col s9" *ngFor="let c of card">
+    <form #formDir="ngForm" #myForm="ngForm" (ngSubmit)="save(myForm)" novalidate>
+      <div class="card">
+        <div class="input-field col s12">
+          <input type="text" id="name" name="name" [(ngModel)]="c.name"   />
+          <label for="name">Card name</label>
+        </div>
+        <div class="input-field col s12">
+          <input type="text" id="login" name="login" [(ngModel)]="c.login" />
+          <label for="login">Login</label>
+        </div>
+        <div class="input-field col s12">
+          <input type="password" id="pass" name="pass" [(ngModel)]="c.pass" />
+          <label for="pass">Password</label>
+        </div>
+        <div class="input-field col s12">
+          <input type="text" id="src" name="src" [(ngModel)]="c.src"  />
+          <label for="src">Src to image</label>
+        </div>
+        <div class="input-field col s12">
+          <input type="hidden" id="id" name="id" [(ngModel)]="c.id" />
+          <button class="btn btn-primary">Save card</button>
+          <p *ngIf="formSubmitted">Card saved</p>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col s3" *ngFor="let c of card">
+    <div class="card">
+      <div class="card-image">
+        <img src="{{ c.src? c.src : 'http://materializecss.com/images/sample-1.jpg' }}">
+        <span class="card-title">{{c.name}}</span>
+      </div>
+      <div class="card-content">
+        <p>Login: {{c.login}}</p>
+        <p>Pass: {{c.pass}}</p>
+      </div>
+    </div>
+  </div>
+</div>

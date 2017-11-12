@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col s6 offset-s3">
+    <h2>Login</h2>
+    <form name="form" (ngSubmit)="login(model.username, model.password)" #f="ngForm" novalidate>
+      <div class="input-field col s12" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+        <input type="text" class="form-control" id="username" name="username"
+               [(ngModel)]="model.username"
+               #username="ngModel" required />
+        <label for="username">Username</label>
+        <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+      </div>
+      <div class="input-field col s12" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+        <input type="password" class="form-control" id="password" name="password"
+               [(ngModel)]="model.password"
+               #password="ngModel" required />
+        <label for="password">Password</label>
+        <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+      </div>
+      <div class="input-field col s12">
+        <button [disabled]="f.invalid" class="btn btn-primary">Login</button>
+        <a [routerLink]="['/register']" class="btn btn-link">Register</a>
+      </div>
+    </form>
+  </div>
+</div>

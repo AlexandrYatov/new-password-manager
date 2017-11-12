@@ -1,0 +1,21 @@
+<div *ngIf="cards.length">
+  <div class="col s3"
+       *ngFor="let card of cards">
+    <div class="card hoverable">
+      <div class="card-image">
+        <img src="{{ card.src }}">
+        <span class="card-title">{{card.name}}</span>
+      </div>
+      <div class="card-content">
+        <p>Login: {{ card.login }}</p>
+        <p class="card-pass" title="click to show/hide password"
+          (click)="toggle(card)"
+        >Pass: {{ card.show? card.pass : '********' }}</p>
+      </div>
+      <div class="card-action">
+        <a (click)="delete(card)" >Delete</a>
+        <a [routerLink]="['/edit-card', card.id]" >Edit</a>
+      </div>
+    </div>
+  </div>
+</div>

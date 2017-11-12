@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<div class="row">
+  <h2 class="col s12 header">Add new card</h2>
+  <div class="col s9">
+    <form #formDir="ngForm" #myForm="ngForm" (ngSubmit)="add(myForm)" novalidate>
+      <div class="card">
+        <div class="input-field col s12">
+          <input type="text" id="name" name="name" required [(ngModel)]="name"  />
+          <label for="name">Card name</label>
+        </div>
+        <div class="input-field col s12">
+          <input type="text" id="login" name="login" required [(ngModel)]="login" />
+          <label for="login">Login</label>
+        </div>
+        <div class="input-field col s12">
+          <input type="password" id="pass" name="pass" required [(ngModel)]="pass" />
+          <label for="pass">Password</label>
+        </div>
+        <div class="input-field col s12">
+          <input type="text" id="src" name="src" required [(ngModel)]="src" />
+          <label for="src">Src to image</label>
+        </div>
+        <div class="input-field col s12">
+          <input type="hidden" id="id" name="id" [(ngModel)]="id" />
+          <button class="btn btn-primary" [disabled]="myForm.invalid">Add card</button>
+          <p *ngIf="formSubmitted">Card added</p>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col s3">
+    <div class="card">
+      <div class="card-image">
+        <img src="{{ src? src : 'http://materializecss.com/images/sample-1.jpg' }}">
+        <span class="card-title">{{name}}</span>
+      </div>
+      <div class="card-content">
+        <p>Login: {{login}}</p>
+        <p>Pass: {{pass}}</p>
+      </div>
+    </div>
+  </div>
+</div>
