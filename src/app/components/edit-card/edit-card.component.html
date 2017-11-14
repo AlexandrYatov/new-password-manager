@@ -6,19 +6,15 @@
       <div class="card">
         <div class="input-field col s12">
           <input type="text" id="name" name="name" [(ngModel)]="c.name"   />
-          <label for="name">Card name</label>
+          <label class="active" for="name">Card name</label>
         </div>
         <div class="input-field col s12">
           <input type="text" id="login" name="login" [(ngModel)]="c.login" />
-          <label for="login">Login</label>
+          <label class="active" for="login">Login</label>
         </div>
         <div class="input-field col s12">
           <input type="password" id="pass" name="pass" [(ngModel)]="c.pass" />
-          <label for="pass">Password</label>
-        </div>
-        <div class="input-field col s12">
-          <input type="text" id="src" name="src" [(ngModel)]="c.src"  />
-          <label for="src">Src to image</label>
+          <label class="active" for="pass">Password</label>
         </div>
         <div class="input-field col s12">
           <input type="hidden" id="id" name="id" [(ngModel)]="c.id" />
@@ -31,7 +27,7 @@
   <div class="col s3" *ngFor="let c of card">
     <div class="card">
       <div class="card-image">
-        <img src="{{ c.src? c.src : 'http://materializecss.com/images/sample-1.jpg' }}">
+        <img src="../../../assets/img/avatar.png">
         <span class="card-title">{{c.name}}</span>
       </div>
       <div class="card-content">

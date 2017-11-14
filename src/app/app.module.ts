@@ -14,6 +14,7 @@ import { Location } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './guard/auth.guard';
+import {UserService} from "./services/user.service";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AuthGuard } from './guard/auth.guard';
   ],
   providers: [
     CardService,
+    UserService,
     AuthGuard,
     Location
   ],

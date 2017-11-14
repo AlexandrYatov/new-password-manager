@@ -3,15 +3,8 @@ import { NgForm } from '@angular/forms';
 import {CardService} from '../../services/card.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
+import { Cards } from '../../models/cards';
 
-class Cards {
-  constructor(public id: number = ( new Date() ).getTime(),
-              public name: string,
-              public login: string,
-              public pass: string,
-              public src: string,
-              public show: boolean = false) {}
-}
 @Component({
   selector: 'app-add-card',
   templateUrl: './add-card.component.html',

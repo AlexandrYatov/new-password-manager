@@ -16,19 +16,14 @@ export class CardComponent implements OnInit {
     this.getAllCards();
   }
   getAllCards(){
-    this.cards = this.cardService.cards;
+    this.cards = this.cardService.getCards();
   }
 
   toggle(card){
     card.show = !card.show;
   }
   delete(card) {
-    let index = this.cards.indexOf(card);
-
-    if (index > -1) {
-      this.cards.splice(index, 1);
-    }
-    localStorage.setItem('allCards', JSON.stringify(this.cards));
+    this.cardService.deleteCard(card);
   }
 
 }

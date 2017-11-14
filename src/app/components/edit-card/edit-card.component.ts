@@ -9,7 +9,6 @@ class Cards {
               public name: string,
               public login: string,
               public pass: string,
-              public src: string,
               public show: boolean = false) {}
 }
 
@@ -37,7 +36,7 @@ export class EditCardComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
     });
-    this.card = this.cardService.cards
+    this.card = this.cardService.getCards()
       .filter( card => {
         return card.id === this.id;
       });
@@ -46,7 +45,6 @@ export class EditCardComponent implements OnInit {
   }
 
   save(myForm: NgForm){
-    console.log(myForm.value.id);
     this.existingCards = JSON.parse(localStorage.getItem('allCards'));
     if ( !this.existingCards ) {
       this.existingCards = [];
@@ -57,7 +55,6 @@ export class EditCardComponent implements OnInit {
       }
     });
     localStorage.setItem('allCards', JSON.stringify( this.existingCards ));
-    console.log(this.existingCards);
     this.router.navigate(['/']);
   }
 

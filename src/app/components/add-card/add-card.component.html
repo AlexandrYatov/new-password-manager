@@ -17,10 +17,6 @@
           <label for="pass">Password</label>
         </div>
         <div class="input-field col s12">
-          <input type="text" id="src" name="src" required [(ngModel)]="src" />
-          <label for="src">Src to image</label>
-        </div>
-        <div class="input-field col s12">
           <input type="hidden" id="id" name="id" [(ngModel)]="id" />
           <button class="btn btn-primary" [disabled]="myForm.invalid">Add card</button>
           <p *ngIf="formSubmitted">Card added</p>
@@ -31,7 +27,7 @@
   <div class="col s3">
     <div class="card">
       <div class="card-image">
-        <img src="{{ src? src : 'http://materializecss.com/images/sample-1.jpg' }}">
+        <img src="../../../assets/img/avatar.png">
         <span class="card-title">{{name}}</span>
       </div>
       <div class="card-content">
