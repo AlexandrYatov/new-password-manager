@@ -23,7 +23,13 @@ export class CardComponent implements OnInit {
     card.show = !card.show;
   }
   delete(card) {
-    this.cardService.deleteCard(card);
+    let index = this.cards.indexOf(card);
+
+    if (index > -1) {
+      this.cards.splice(index, 1);
+    }
+    localStorage.setItem('allCards', JSON.stringify(this.cards));
+    this.cardService.getCards();
   }
 
 }

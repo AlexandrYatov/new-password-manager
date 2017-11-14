@@ -19,18 +19,7 @@ export class CardService {
     let cards = JSON.parse(localStorage.getItem('allCards'));
     return cards;
   }
-
-  deleteCard(card) {
-    let index = this.getCards().indexOf(card);
-    if (index > -1) {
-      this.getCards().splice(index, 1);
-      localStorage.setItem('allCards', JSON.stringify( this.getCards() ));
-    }
-    console.log(card);
-    console.log( this.getCards() )
-
-    return card;
-  }
+  
 
 
 
