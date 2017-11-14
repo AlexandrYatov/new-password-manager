@@ -13,24 +13,18 @@ export class CardComponent implements OnInit {
   cards = [];
   constructor(private cardService: CardService) { }
   ngOnInit() {
-    this.getAllCards();
+    this.getCards();
   }
-  getAllCards(){
-    this.cards = this.cardService.getCards();
+  getCards() {
+    this.cards = this.cardService.getAllCards();
   }
 
-  toggle(card){
-    card.show = !card.show;
+  toggle(card) {
+    this.cardService.toggleShow(card);
   }
   delete(card) {
-    let index = this.cards.indexOf(card);
-
-    if (index > -1) {
-      this.cards.splice(index, 1);
-    }
-    // this.cardService.deleteCard(card);
-    localStorage.setItem('allCards', JSON.stringify(this.cards));
-    this.cardService.getCards();
+    this.cardService.deleteCard(card);
+    this.getCards();
   }
 
 }

@@ -3,14 +3,7 @@ import { NgForm } from '@angular/forms';
 import {CardService} from '../../services/card.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
-
-class Cards {
-  constructor(public id: number = ( new Date() ).getTime(),
-              public name: string,
-              public login: string,
-              public pass: string,
-              public show: boolean = false) {}
-}
+import { Cards } from '../../models/cards';
 
 @Component({
   selector: 'app-edit-card',
@@ -33,10 +26,19 @@ export class EditCardComponent implements OnInit {
 
   }
   getCard() {
+    // this.sub = this.route.params.subscribe(params => {
+    //   this.id = +params['id'];
+    // });
+    // let id = this.id;
+    // this.cardService.getEditCard(id);
+    // localStorage.setItem('card', JSON.stringify(this.card));
+
+    // old
+
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
     });
-    this.card = this.cardService.getCards()
+    this.card = this.cardService.getAllCards()
       .filter( card => {
         return card.id === this.id;
       });

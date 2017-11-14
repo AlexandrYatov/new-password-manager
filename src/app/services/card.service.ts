@@ -9,27 +9,39 @@ export class CardService {
   id: number;
   private sub: any;
   card = [];
-  // cards = [];
+  cards = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private location: Location) { }
 
-  getCards(){
+  getAllCards() {
     let cards = JSON.parse(localStorage.getItem('allCards'));
     return cards;
   }
+  toggleShow(card) {
+    return card.show = !card.show;
+  }
 
-  // deleteCard(card) {
-  //   let index = this.getCards().indexOf(card);
-  //
-  //   if (index > -1) {
-  //     let returnCards = this.getCards().splice(index, 1);
-  //     console.log(this.getCards())
-  //     return returnCards;
-  //   }
-  // }
+  deleteCard(card) {
+    this.cards = this.getAllCards();
+    let index = this.cards.indexOf(card);
+    if (index = -1) {
+      let returnCards = this.cards.splice(index, 1);
+      localStorage.setItem('allCards', JSON.stringify(this.cards));
+    }
+    this.getAllCards();
+    return this.cards;
+  }
 
+
+  getEditCard(id) {
+    this.card = this.getAllCards()
+      .filter( card => {
+        return card.id === id;
+      });
+    return this.card;
+  }
 
 
 }
