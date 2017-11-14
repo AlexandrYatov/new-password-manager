@@ -28,6 +28,7 @@ export class CardComponent implements OnInit {
     if (index > -1) {
       this.cards.splice(index, 1);
     }
+    // this.cardService.deleteCard(card);
     localStorage.setItem('allCards', JSON.stringify(this.cards));
     this.cardService.getCards();
   }

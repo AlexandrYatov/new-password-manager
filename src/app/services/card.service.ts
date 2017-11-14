@@ -9,7 +9,7 @@ export class CardService {
   id: number;
   private sub: any;
   card = [];
-  cards = [];
+  // cards = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -19,7 +19,16 @@ export class CardService {
     let cards = JSON.parse(localStorage.getItem('allCards'));
     return cards;
   }
-  
+
+  // deleteCard(card) {
+  //   let index = this.getCards().indexOf(card);
+  //
+  //   if (index > -1) {
+  //     let returnCards = this.getCards().splice(index, 1);
+  //     console.log(this.getCards())
+  //     return returnCards;
+  //   }
+  // }
 
 
 
