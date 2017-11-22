@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {Cards} from '../models/cards';
 
 
 @Injectable()
@@ -10,6 +11,8 @@ export class CardService {
   private sub: any;
   card = [];
   cards = [];
+  existingCards: Cards[] = [];
+  public formSubmitted: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -38,10 +41,44 @@ export class CardService {
   getEditCard(id) {
     this.card = this.getAllCards()
       .filter( card => {
-        return card.id === id;
+        return card.id === this.id;
       });
-    return this.card;
+    let card = this.card;
+    localStorage.setItem('card', JSON.stringify({card}));
+    console.log('getCard editservice');
   }
 
+  addCard(myForm) {
+    this.existingCards = JSON.parse(localStorage.getItem('allCards'));
+
+    if ( !this.existingCards ) {
+      this.existingCards = [];
+    }
+
+    myForm.value.id = ( new Date() ).getTime();
+    myForm.value.show = false;
+    let card = myForm.value;
+
+    this.formSubmitted = true;
+
+    localStorage.setItem('card', JSON.stringify({card}));
+    this.existingCards.push(card);
+    localStorage.setItem('allCards', JSON.stringify(this.existingCards));
+    this.router.navigate(['/']);
+  }
+
+  saveCard(myForm) {
+    this.existingCards = JSON.parse(localStorage.getItem('allCards'));
+    if ( !this.existingCards ) {
+      this.existingCards = [];
+    }
+    this.existingCards.forEach( (card, cardId ) => {
+      if (card.id === myForm.value.id) {
+        this.existingCards[cardId] = myForm.value;
+      }
+    });
+    localStorage.setItem('allCards', JSON.stringify( this.existingCards ));
+    this.router.navigate(['/']);
+  }
 
 }

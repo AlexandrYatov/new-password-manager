@@ -26,15 +26,6 @@ export class EditCardComponent implements OnInit {
 
   }
   getCard() {
-    // this.sub = this.route.params.subscribe(params => {
-    //   this.id = +params['id'];
-    // });
-    // let id = this.id;
-    // this.cardService.getEditCard(id);
-    // localStorage.setItem('card', JSON.stringify(this.card));
-
-    // old
-
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
     });
@@ -47,17 +38,7 @@ export class EditCardComponent implements OnInit {
   }
 
   save(myForm: NgForm){
-    this.existingCards = JSON.parse(localStorage.getItem('allCards'));
-    if ( !this.existingCards ) {
-      this.existingCards = [];
-    }
-    this.existingCards.forEach( (card, cardId ) => {
-      if (card.id === myForm.value.id) {
-        this.existingCards[cardId] = myForm.value;
-      }
-    });
-    localStorage.setItem('allCards', JSON.stringify( this.existingCards ));
-    this.router.navigate(['/']);
+    this.cardService.saveCard(myForm);
   }
 
 }
