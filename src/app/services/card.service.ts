@@ -7,7 +7,7 @@ import {Cards} from '../models/cards';
 @Injectable()
 export class CardService {
 
-  id: number;
+  id: any;
   private sub: any;
   card = [];
   cards = [];
@@ -38,14 +38,15 @@ export class CardService {
   }
 
 
-  getEditCard(id) {
-    this.card = this.getAllCards()
+  getEditCard() {
+    this.sub = this.route.queryParams.subscribe(params => {
+      this.id = +params['id'];
+      console.log(this.id);
+    });
+     this.card = this.getAllCards()
       .filter( card => {
         return card.id === this.id;
       });
-    let card = this.card;
-    localStorage.setItem('card', JSON.stringify({card}));
-    console.log('getCard editservice');
   }
 
   addCard(myForm) {
