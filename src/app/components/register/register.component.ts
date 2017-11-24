@@ -1,15 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-
-class Users {
-  constructor(public id: number = ( new Date() ).getTime(),
-              public firstName: string,
-              public lastName: string,
-              public username: string,
-              public password: string,
-              public loading: boolean = false) {}
-}
+import {Users} from '../../models/users';
 
 
 @Component({
@@ -39,7 +31,6 @@ export class RegisterComponent {
 
     this.formSubmitted = true;
 
-    localStorage.setItem('user', JSON.stringify({user}));
     this.existingUsers.push(user);
     localStorage.setItem('users', JSON.stringify(this.existingUsers));
 

@@ -1,5 +1,6 @@
 export class Cards {
-  constructor(public id: number = ( new Date() ).getTime(),
+  constructor(public id: number,
+              public userId: number,
               public name: string,
               public login: string,
               public pass: string,

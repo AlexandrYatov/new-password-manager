@@ -28,11 +28,14 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     let users = JSON.parse(localStorage.getItem('users')).filter(r => {
       if (r.username === username && r.password === password) {
-        localStorage.setItem('currentUser', JSON.stringify( { username: username, password: password } ));
-        this.router.navigate([this.returnUrl]);
-      } else {
-        this.router.navigate(['/register']);
+        console.log(username + ' username ' + r.username);
+        console.log(password + ' password ' + r.password);
+        localStorage.setItem('currentUser', JSON.stringify( {id: r.id, username: username, password: password } ));
+        this.router.navigate(['/']);
       }
+      // else {
+      //   this.router.navigate(['/register']);
+      // }
     });
 
   }
