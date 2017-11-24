@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Users} from "../../models/users";
+import {Users} from '../../models/users';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -16,28 +17,14 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router) { }
+    private userService: UserService) { }
 
   ngOnInit() {
-    // reset login status
     localStorage.removeItem('currentUser');
-
-    // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   login(username, password) {
-    this.loading = true;
-    this.users = JSON.parse(localStorage.getItem('users')).filter(r => {
-      return r.username === username && r.password === password;
-    })
-    if (this.users.length) {
-      if (this.users[0].username === username && this.users[0].password === password) {
-        localStorage.setItem('currentUser', JSON.stringify( {id: this.users[0].id, username: username, password: password } ));
-        this.router.navigate(['/']);
-      }
-    } else {
-      this.router.navigate(['/register']);
-    }
+    this.userService.loginUser(username, password);
   }
 }

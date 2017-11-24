@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import {Users} from '../../models/users';
+import {UserService} from '../../services/user.service';
 
 
 @Component({
@@ -11,29 +10,10 @@ import {Users} from '../../models/users';
 
 export class RegisterComponent {
   model: any = {};
-  loading = false;
-  existingUsers: Users[] = [];
-  public formSubmitted: boolean = false;
   constructor(
-    private router: Router) { }
+    private userService: UserService) { }
 
   register(myForm: NgForm) {
-
-    this.existingUsers = JSON.parse(localStorage.getItem('users'));
-
-    if ( !this.existingUsers ) {
-      this.existingUsers = [];
-    }
-
-    myForm.value.id = ( new Date() ).getTime();
-    myForm.value.loading = false;
-    let user = myForm.value;
-
-    this.formSubmitted = true;
-
-    this.existingUsers.push(user);
-    localStorage.setItem('users', JSON.stringify(this.existingUsers));
-
-    this.router.navigate(['/login']);
+    this.userService.registerUser(myForm);
   }
 }
