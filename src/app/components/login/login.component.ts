@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Users} from "../../models/users";
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ export class LoginComponent implements OnInit {
   model: any = {};
   loading = false;
   returnUrl: string;
+  users: Users[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -26,17 +28,18 @@ export class LoginComponent implements OnInit {
 
   login(username, password) {
     this.loading = true;
-    let users = JSON.parse(localStorage.getItem('users')).filter(r => {
-      if (r.username === username && r.password === password) {
-        console.log(username + ' username ' + r.username);
-        console.log(password + ' password ' + r.password);
-        localStorage.setItem('currentUser', JSON.stringify( {id: r.id, username: username, password: password } ));
+    this.users = JSON.parse(localStorage.getItem('users')).filter(r => {
+      return r.username === username && r.password === password;
+    })
+    if (this.users.length) {
+      if (this.users[0].username === username && this.users[0].password === password) {
+        localStorage.setItem('currentUser', JSON.stringify( {id: this.users[0].id, username: username, password: password } ));
         this.router.navigate(['/']);
+        console.log('true');
       }
-      // else {
-      //   this.router.navigate(['/register']);
-      // }
-    });
-
+    } else {
+      this.router.navigate(['/register']);
+      console.log('false');
+    }
   }
 }
